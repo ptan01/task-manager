@@ -20,7 +20,7 @@ const taskSlice = createSlice({
         },
         removeTask : (state, {payload})=> {
         const filteredItems = state.task.filter(item => item.id != payload)
-        state.task = filteredItems ;
+        state.task = filteredItems ;    
            
         },
         updateStatus : (state , {payload})=>{
@@ -33,7 +33,7 @@ const taskSlice = createSlice({
 }) ;
 
 export const {updateStatus} = taskSlice.actions ;
-
+export const {removeTask} = taskSlice.actions ;
 export const {addTask} = taskSlice.actions ;
 
 export default taskSlice.reducer;
