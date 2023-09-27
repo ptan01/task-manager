@@ -1,13 +1,26 @@
 import { useForm } from "react-hook-form";
 import Modal from "../ui/Modal";
+import { useDispatch } from "react-redux";
+import { addTask } from "../../redux/features/task/taskSlice";
 
 const AddTaskModal = ({ isOpen, setIsOpen, }) => {
 
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
+
+    const dispatch = useDispatch()
+
+    const onCancel = (e)=>{
+        e.preventDefault()
+        reset()
+        setIsOpen(false)
+    } 
 
     const onSubmit = (data) => {
         console.log(data)
+        dispatch(addTask(data))
+        reset()
+        setIsOpen(false)
     }
 
 
@@ -47,7 +60,7 @@ const AddTaskModal = ({ isOpen, setIsOpen, }) => {
                     </div>
                 </div>
                 <div className="flex justify-between mt-4">
-                    <button className="btn btn-danger" >Cancel</button>
+                    <button className="btn btn-danger" onClick={onCancel} >Cancel</button>
                     <button className="btn btn-primary" type="submit">submit</button>
                 </div>
             </form>
